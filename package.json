@@ -1,0 +1,35 @@
+{
+  "name": "html2scss-compiler",
+  "version": "1.0.0",
+  "description": "cli for compiler html to scss",
+  "bin": {
+    "html2scss": "index.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d dist"
+  },
+  "keywords": [
+    "compiler",
+    "development",
+    "utils",
+    "cli"
+  ],
+  "author": "haozijunqaq",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "inquirer": "^6.2.1",
+    "ora": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "cheerio": "^1.0.0-rc.3",
+    "jade": "^1.11.0"
+  }
+}
