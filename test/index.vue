@@ -1,6 +1,8 @@
 <template>
   <div class="main-container">
 
+    <div></div>
+
     <img class="exchange-log-header" src="../../static/images/exchange_log_header.png" alt=""/>
 
     <div class="title">

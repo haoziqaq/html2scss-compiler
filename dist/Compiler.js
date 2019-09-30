@@ -44,6 +44,7 @@ var Compiler = function () {
         ignoreWhitespace: true,
         xmlMode: true
       });
+
       this.$('template').children().each(function (index, child) {
         if (child.type === 'tag') {
           _this.cssTree = _this.resolveClass(child);
@@ -58,21 +59,25 @@ var Compiler = function () {
       var children = [];
       var nodeChildren = this.$(node).children();
       var clazz = this.$(node).attr('class');
+      var tagName = node.name;
       if (nodeChildren.length > 0) {
         nodeChildren.each(function (index, child) {
           if (child.type === 'tag') {
             var childNode = _this2.resolveClass(child);
             var clazzList = childNode.clazz && childNode.clazz.split(' ') || [];
-            if (clazzList.length === 0 && childNode.children.length > 0) {
-              clazzList.push('_');
+            //如果没有clazz 则用tagName代替
+            if (clazzList.length === 0) {
+              clazzList.push(childNode.tagName + ':tag');
             }
             clazzList.forEach(function (clazz, index) {
+              //第一个永远为真节点，后面的兄弟节点为根据clazz数量复制出来的叶子节点
               if (index === 0) {
                 childNode.clazz = clazzList[0];
                 children.push(childNode);
               } else {
                 children.push({
                   clazz: clazz,
+                  tagName: childNode.tagName,
                   children: []
                 });
               }
@@ -82,7 +87,8 @@ var Compiler = function () {
       }
       return {
         clazz: clazz,
-        children: children
+        children: children,
+        tagName: tagName
       };
     }
   }, {
@@ -90,7 +96,7 @@ var Compiler = function () {
     value: function writeFile() {
       var templatePath = path.resolve(__dirname, '../template/main.jade');
       var code = jade.renderFile(templatePath, { tree: this.cssTree, pretty: true });
-      fs.writeFileSync('./index.scss', code);
+      fs.writeFileSync('./' + new Date().getTime() + '.scss', code);
     }
   }, {
     key: 'run',
