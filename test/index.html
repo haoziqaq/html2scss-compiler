@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>刮刮乐</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+<div class="content_body">
+    <img src="image/logo.png" class="logo">
+    <img src="image/tittle.png" class="tittle">
+    <!--刮奖区-->
+    <div class="box">
+        <div class="content">
+            <div id="mask_img_bg">
+                <!--没中奖图片-->
+                <img src="image/no_get_btn.png" class="no_get_btn none"/>
+                <!--中奖图片-->
+                <img src="image/yes_get_btn.png" class="yes_get_btn "/>
+            </div>
+            <img id="redux" src="image/start_btn.png"/>
+        </div>
+    </div>
+
+    <img src="image/logo_bottom.png" class="logo_bottom">
+</div>
+
+<!--模态框-->
+<div class="modal">
+    <!--规则-->
+    <img src="image/rule.png" class="img rule">
+
+    <!--没中奖-->
+    <img src="image/no_goods.png" class="img no_goods none">
+
+    <!--恭喜中奖-->
+    <div class="success none">
+        <img src="image/yes_goods.png" class="yes_goods">
+        <img src="image/go_btn.png" class="go_btn">
+    </div>
+
+    <!--奖品已经送完-->
+    <img src="image/end_goods.png" class="img end_goods none">
+
+    <!--活动已经结束-->
+    <img src="image/jishu.png" class="img jishu none">
+</div>
+
+<script type="text/javascript" src="js/rem.js"></script>
+<!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>-->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.eraser.js"></script>
+<script>
+    $(function () {
+        setTimeout(function () {
+            $('.modal').fadeIn()
+        },300);
+        //
+        $('.img').click(function () {
+            $('.modal').hide();
+            // 当点击规则图片取消模态框的时候，发松ajax
+            $.ajax({
+                type: "get",
+                url: "",
+                dataType: "json",
+                data: {},
+                success: function () {
+
+                },
+                error: function () {
+                    alert("ajax数据有误！")
+                }
+            });
+        });
+
+        // 刮奖活动
+        $('#redux').eraser({
+            size: 20,   //设置橡皮擦大小
+            completeRatio: .6, //设置擦除面积比例
+            completeFunction: showResetButton   //大于擦除面积比例触发函数（就是中奖或没中奖）
+        });
+
+        function showResetButton() {
+            $(".modal").fadeIn(300);
+            // 规则那张图片不让他显示(不用管它，也不要改它)
+            $('.rule').hide();
+            // 没中奖
+            // $(".no_goods").fadeIn(400);
+
+            // 中奖了
+            $(".success").fadeIn(400);
+        }
+
+        $(".img,.go_btn").click(function () {
+            $(".modal").fadeOut()
+        })
+
+    })
+</script>
+
+</body>
+</html>

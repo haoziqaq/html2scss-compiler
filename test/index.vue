@@ -1,13 +1,15 @@
 <template>
   <div class="main-container">
 
-    <div></div>
+    <img src="" alt="">
 
-    <img class="exchange-log-header" src="../../static/images/exchange_log_header.png" alt=""/>
+    <input type="text">
+
+
 
     <div class="title">
 
-      <img mode="widthFix" class="title-icon" src="../../static/images/order.png" alt=""/>
+      <img mode="widthFix" class="title-icon" src="../../static/images/order.png" alt="">
 
       <div class="title-value">全部订单</div>
 

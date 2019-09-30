@@ -4,8 +4,8 @@ const ora = require('ora'); //带标记的打印
 const inquirer = require('inquirer'); //交互
 const chalk = require('chalk'); //文字上色
 const spinner = ora();
-const Compiler = require('./dist/Compiler').default;
 const path = require('path');
+const Compiler = require('./Compiler').default;
 
 program.version('1.0.0', '-v, --version')
   .command('c')
@@ -20,6 +20,7 @@ program.version('1.0.0', '-v, --version')
       const filePath = result.filePath;
       if (path.extname(filePath)) {
         new Compiler(filePath).run();
+        spinner.succeed(chalk.green('编辑成功'));
       } else {
         spinner.fail(chalk.red('路径有误，请检查是否带了文件后缀名'));
       }
